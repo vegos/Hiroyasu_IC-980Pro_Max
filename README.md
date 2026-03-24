@@ -1,14 +1,17 @@
-# Hiroyasu YSF Tool
+# Hiroyasu IC-980Pro Max Channels Tool
 
-A practical tool for exporting, editing, and importing channel data from Hiroyasu IC-980Pro Max `.Ysf` files using a human-readable CSV format.
+A (python) tool for exporting, editing, and importing channel data from **Hiroyasu IC-980Pro Max** `.Ysf` files using a human-readable CSV format.
 
-This tool performs safe patching: it modifies only currently known and validated fields while preserving all unknown/internal data in the original file.
+This tool performs safe patching: it modifies **only** currently known and validated fields while preserving all unknown/internal data in the original file.  
+It's a work-in-progress, so keep up for updates.  
+
+NOTE: This tool works **ONLY** on IC-980Pro Max and not on IC-980Pro (not Max).  
 
 ---
 
 ## ⚠️ Disclaimer
 
-This is a VERY BETA tool.
+This is a **VERY BETA** tool.
 
 - Use it at your own risk
 - No warranty is provided
@@ -36,7 +39,7 @@ python hiroyasu.py export input.Ysf output.csv
 
 python hiroyasu.py import template.Ysf input.csv output.Ysf
 
-⚠️ The template `.Ysf` file is required. The tool does NOT rebuild files from scratch.
+⚠️ NOTE: The template `.Ysf` file is **required**. The tool does NOT rebuild files from scratch.
 
 ---
 
@@ -132,11 +135,8 @@ busy_inhibit = ON → ignored
 
 ### Frequency Limits
 
-CPS may reject invalid ranges.
-
-Typical:
-- VHF: 108–180 MHz
-- UHF: 360–520 MHz
+CPS may reject invalid ranges.  
+Memories with invalid frequencies may be blank.  
 
 ---
 
@@ -150,7 +150,7 @@ Unknown data is preserved.
 
 ## Debug Mode
 
-python hiroyasu.py export input.Ysf output.csv --debug
+**python hiroyasu.py export input.Ysf output.csv --debug**  
 
 Includes:
 - raw hex
@@ -160,27 +160,22 @@ Not for normal editing.
 
 ---
 
-## Workflow
+## Workflow / Syntax
 
-1. Export:
-python hiroyasu.py export radio.Ysf channels.csv
+1. Export:  
+**python hiroyasu.py export radio.Ysf channels.csv**  
+The tool is exporting the CPS file `radio.Ysf` to a csv file called `channels.csv`  
 
-2. Edit CSV
+3. Edit CSV
 
-3. Import:
-python hiroyasu.py import radio.Ysf channels.csv new.Ysf
+4. Import:  
+**python hiroyasu.py import radio.Ysf channels.csv new.Ysf**  
+The tool is creating the `new.Ysf` using the csv file `channels.csv`. The `radio.Ysf` is the "template" used.  
 
-4. Load into CPS
-
----
-
-## Summary
-
-Safe CSV-based editing for Hiroyasu channel data without breaking binary structure.
+6. Load into CPS
 
 ---
 
 ## Author
 
-Antonis Maglaras
-©2026
+Antonis Maglaras - ©2026
