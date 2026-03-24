@@ -1,11 +1,11 @@
 # Hiroyasu IC-980Pro Max Channels Tool
 
-A (python) tool for exporting, editing, and importing channel data from **Hiroyasu IC-980Pro Max** `.Ysf` files using a human-readable CSV format.
+A Python tool for exporting, editing, and importing channel data from **Hiroyasu IC-980Pro Max** `.Ysf` files using a human-readable CSV format.
 
 This tool performs safe patching: it modifies **only** currently known and validated fields while preserving all unknown/internal data in the original file.  
-It's a work-in-progress, so keep up for updates.  
+It is still a work in progress and will be updated over time.
 
-NOTE: This tool works **ONLY** on IC-980Pro Max and not on IC-980Pro (not Max).  
+> **Note:** This tool currently supports **only** the **IC-980Pro Max** and **not** the IC-980Pro.
 
 ---
 
@@ -24,8 +24,8 @@ This is a **VERY BETA** tool.
 - Export channels to human-readable CSV
 - Edit only meaningful fields (no binary junk)
 - Import changes back safely into `.Ysf`
-- Preserves unknown/internal data
-- Supports most common channel settings
+- Preserve unknown/internal data
+- Support most common channel settings
 
 ---
 
@@ -33,13 +33,17 @@ This is a **VERY BETA** tool.
 
 ### Export channels to CSV
 
+```bash
 python hiroyasu.py export input.Ysf output.csv
+```
 
 ### Import CSV back to YSF
 
+```bash
 python hiroyasu.py import template.Ysf input.csv output.Ysf
+```
 
-⚠️ NOTE: The template `.Ysf` file is **required**. The tool does NOT rebuild files from scratch.
+> **Note:** The template `.Ysf` file is **required**. The tool does **not** rebuild files from scratch.
 
 ---
 
@@ -47,15 +51,15 @@ python hiroyasu.py import template.Ysf input.csv output.Ysf
 
 ### Channel Basics
 
-- channel_index → Channel number (1-based)
-- name → Channel name (~10 chars max)
+- `channel_index` → Channel number (1-based)
+- `name` → Channel name (~10 chars max)
 
 ---
 
 ### Frequencies
 
-- rx_mhz → Receive frequency (MHz)
-- tx_mhz → Transmit frequency (MHz)
+- `rx_mhz` → Receive frequency (MHz)
+- `tx_mhz` → Transmit frequency (MHz)
 
 Use MHz format. Hz fields are internal/debug only.
 
@@ -63,51 +67,51 @@ Use MHz format. Hz fields are internal/debug only.
 
 ### RF Settings
 
-- tx_power → High / Low
-- bandwidth → Wide / Narrow
-- scan → ADD / DEL
+- `tx_power` → `High` / `Low`
+- `bandwidth` → `Wide` / `Narrow`
+- `scan` → `ADD` / `DEL`
 
 ---
 
 ### Signaling / Access Control
 
-- busy_inhibit → OFF / DQT / CAT
-- rx_signal_code → OFF / DTMF / FSK / FSK DTMF
-- special_dcs → OFF / Special DCS 1..4
+- `busy_inhibit` → `OFF` / `DQT` / `CAT`
+- `rx_signal_code` → `OFF` / `DTMF` / `FSK` / `FSK DTMF`
+- `special_dcs` → `OFF` / `Special DCS 1..4`
 
 ---
 
 ### Audio / Modulation
 
-- fm_am → FM / AM
-- weather_alert → ON / OFF
-- vague_subaudio → ON / OFF
-- compander → ON / OFF
+- `fm_am` → `FM` / `AM`
+- `weather_alert` → `ON` / `OFF`
+- `vague_subaudio` → `ON` / `OFF`
+- `compander` → `ON` / `OFF`
 
 ---
 
 ### Scrambler
 
-- scramble → OFF / scramble1..scramble8
+- `scramble` → `OFF` / `scramble1..scramble8`
 
 ---
 
 ### PTT Signaling
 
-- ptt_push_code → OFF / ID / Code form-1..30
-- ptt_pop_code → OFF / ID / Code form-1..30
+- `ptt_push_code` → `OFF` / `ID` / `Code form-1..30`
+- `ptt_pop_code` → `OFF` / `ID` / `Code form-1..30`
 
 ---
 
 ### CTCSS / DCS
 
-- qt_dqt_enc → TX tone
-- qt_dqt_dec → RX tone
+- `qt_dqt_enc` → TX tone
+- `qt_dqt_dec` → RX tone
 
 Formats:
 
-- CTCSS: 67.0, 88.5, etc
-- DCS: D023N, D023I
+- `CTCSS`: `67.0`, `88.5`, etc.
+- `DCS`: `D023N`, `D023I`
 
 ---
 
@@ -117,10 +121,11 @@ Formats:
 
 Only modified values are written back.
 
-This prevents:
+This helps prevent:
+
 - corruption of unused channels
 - overwriting unknown data
-- CPS issues
+- CPS compatibility issues
 
 ---
 
@@ -129,14 +134,17 @@ This prevents:
 Invalid values are ignored.
 
 Example:
+
+```
 busy_inhibit = ON → ignored
+```
 
 ---
 
 ### Frequency Limits
 
 CPS may reject invalid ranges.  
-Memories with invalid frequencies may be blank.  
+Memories with invalid frequencies may appear blank.
 
 ---
 
@@ -150,32 +158,39 @@ Unknown data is preserved.
 
 ## Debug Mode
 
-**python hiroyasu.py export input.Ysf output.csv --debug**  
+```bash
+python hiroyasu.py export input.Ysf output.csv --debug
+```
 
 Includes:
+
 - raw hex
 - internal flags
 
-Not for normal editing.
+Not intended for normal editing.
 
 ---
 
-## Workflow / Syntax
+## Recommended Workflow
 
-1. Export:  
-**python hiroyasu.py export radio.Ysf channels.csv**  
-The tool is exporting the CPS file `radio.Ysf` to a csv file called `channels.csv`  
+1. Export:
 
-3. Edit CSV
+```bash
+python hiroyasu.py export radio.Ysf channels.csv
+```
 
-4. Import:  
-**python hiroyasu.py import radio.Ysf channels.csv new.Ysf**  
-The tool is creating the `new.Ysf` using the csv file `channels.csv`. The `radio.Ysf` is the "template" used.  
+2. Edit the CSV file.
 
-6. Load into CPS
+3. Import:
+
+```bash
+python hiroyasu.py import radio.Ysf channels.csv new.Ysf
+```
+
+4. Load `new.Ysf` into CPS.
 
 ---
 
 ## Author
 
-Antonis Maglaras - ©2026
+Antonis Maglaras — ©2026
