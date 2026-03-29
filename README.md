@@ -191,6 +191,12 @@ python hiroyasu.py import radio.Ysf channels.csv new.Ysf
 
 ---
 
+### More to explore  
+
+Adjustment menu on CPS (8110) for Hiroyasu IC-980Pro Max is explaned [here](https://github.com/vegos/Hiroyasu_IC-980Pro_Max_CPS_Explained).
+
+---  
+
 ## Author
 
 Antonis Maglaras — ©2026
