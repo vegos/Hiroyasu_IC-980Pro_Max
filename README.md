@@ -164,4 +164,4 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Import-Export_Script
 ## Adjustment Menu
 
 CPS adjustment menu documentation (translated, explained):  
-https://github.com/vegos/Hiroyasu_IC-980Pro_Max_CPS_Explained
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
