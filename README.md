@@ -152,8 +152,8 @@
 
 ## Tool for Memory Management
 
-You can use the Python script provided:  
-https://github.com/vegos/Hiroyasu_IC-980Pro_Max
+You can use the Python script:  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Import-Export_Script
 
 - Export to CSV  
 - Import channel memories  
