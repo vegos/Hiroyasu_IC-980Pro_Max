@@ -2,18 +2,18 @@
 
 ## 🆕 Upgraded Features (IC-980Pro Max)
 
+- FM/AM modulation (AM receive only)
 - Electronic relay (silent operation, no clicking in dual watch)
 - True dual receive (V/U bands simultaneously)
 - Dual band display / watch / receive
 - FSK & DTMF signaling support
 - FM Radio Resume (FMR)
-- FM/AM modulation (AM receive only)
 - Anti-jamming (carrier interference reduction)
 - Wireless channel copy (air cloning)
 - Wireless clone between same model radios
 - Automatic contact (AUC – out-of-range alert)
 - Voice menu prompts
-- Weather forecast channels (USA/Canada support)
+- Weather forecast channels (USA/Canada)
 - Programmable weather frequencies
 - Customizable key combinations (quick menu access)
 
@@ -24,14 +24,14 @@
 - 25W output power
 - Compact & lightweight (450g, palm-sized)
 - Dual microphone design (main + hand mic)
-- Intelligent cooling fan (auto activates on high RF temperature)
-- Compander (improves long-distance audio clarity)
+- Intelligent cooling fan (auto activates on high temperature)
+- Compander (compressor/expander - improves long-distance audio clarity)
 - 8-level voice scrambler
-- VOX (hands-free operation for driving)
+- VOX (hands-free operation)
 - 1750Hz repeater tone
 - AI noise reduction (Denoise – background noise suppression)
 - Dual band operation (VHF/UHF simultaneous receive)
-- Built-in FM broadcast radio (76–108 MHz)
+- Built-in FM broadcast radio reception (76–108 MHz)
 - FM Radio Resume (returns after transmission ends)
 
 ---
@@ -71,7 +71,9 @@
 ## 📊 General Specifications
 
 - Frequency Range (EU): VHF 144–146 MHz, UHF 430–440 MHz  
+  (Note: it can be expanded)
 - Frequency Range (USA): VHF 144–148 MHz, UHF 420–450 MHz  
+  (Note: it can be expanded)
 - Channels: 500  
 - Channel Spacing: 25 kHz (Wide), 12.5 kHz (Narrow)  
 - Step Size: 2.5 / 5 / 6.25 / 10 / 12.5 / 20 / 25 / 30 / 50 kHz  
@@ -148,13 +150,6 @@
 
 ---
 
-## Compatibility
-
-- ✅ IC-980Pro Max  
-- ❌ IC-980Pro (non-Max)
-
----
-
 ## Tool for Memory Management
 
 You can use the Python script provided:  
@@ -168,5 +163,5 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max
 
 ## Adjustment Menu
 
-CPS adjustment menu documentation:  
+CPS adjustment menu documentation (translated, explained):  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max_CPS_Explained
