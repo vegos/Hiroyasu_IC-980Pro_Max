@@ -24,14 +24,47 @@
 - 25W output power
 - Compact & lightweight (450g, palm-sized)
 - Dual microphone design (main + hand mic)
-- Intelligent cooling fan
+- Intelligent cooling fan (auto activates on high RF temperature)
 - Compander (improves long-distance audio clarity)
 - 8-level voice scrambler
-- VOX (hands-free operation)
+- VOX (hands-free operation for driving)
 - 1750Hz repeater tone
-- AI noise reduction (background noise suppression)
-- Dual band operation (VHF/UHF simultaneous)
-- Built-in FM radio (76–108 MHz)
+- AI noise reduction (Denoise – background noise suppression)
+- Dual band operation (VHF/UHF simultaneous receive)
+- Built-in FM broadcast radio (76–108 MHz)
+- FM Radio Resume (returns after transmission ends)
+
+---
+
+## 📡 Advanced Features
+
+### Wireless Clone / Copy Modes
+
+- Full clone (all data)
+- Channel-only clone
+- Send / Receive modes between radios
+- Works only between identical models
+
+---
+
+### Quick Key Assignment
+
+- User-defined key combinations (FUN + number)
+- Allows fast access to menu items (e.g. squelch)
+
+---
+
+### Anti-Jamming
+
+- Reduces interference from strong nearby carriers
+- Helps in noisy RF environments
+
+---
+
+### Automatic Contact (AUC)
+
+- Alerts when radios go out of range
+- Useful for team coordination
 
 ---
 
@@ -79,7 +112,7 @@
 ### AM Mode
 
 - AM is receive-only and not a true hardware demodulator  
-- Likely implemented via software processing  
+- Likely implemented via DSP/software processing  
 - Audio quality is **very poor**
 
 ---
@@ -103,15 +136,15 @@
 
 - Works only as:
   - OFF or FULL
-- Does not show real signal levels
+- Does not show real RSSI levels
 
 ---
 
 ## 🧠 Notes
 
 - AM mode is not suitable for serious use (e.g. airband)
-- Weather channels are region-dependent
-- Some features require compatible radios
+- Weather channels are region-dependent (mainly US/Canada)
+- Some features require identical radios (clone/AUC)
 
 ---
 
@@ -124,8 +157,8 @@
 
 ## Tool for Memory Management
 
-You can use the Python script provided
-[here](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/blob/main/CPS_Explained).
+You can use the Python script provided:  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max
 
 - Export to CSV  
 - Import channel memories  
@@ -135,5 +168,5 @@ You can use the Python script provided
 
 ## Adjustment Menu
 
-Adjustment menu on CPS (8110) for Hiroyasu IC-980Pro Max is translated and explaned [here](https://github.com/vegos/Hiroyasu_IC-980Pro_Max_CPS_Explained).
-
+CPS adjustment menu documentation:  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max_CPS_Explained
