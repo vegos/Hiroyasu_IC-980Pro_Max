@@ -1,5 +1,7 @@
 # Hiroyasu IC-980Pro Max — Specifications & Features
 
+![Hiroyasu IC-980Pro Max](images/IC-980Pro_Max.jpg)  
+
 ## 🆕 Upgraded Features (IC-980Pro Max)
 
 - FM/AM modulation (AM receive only)
@@ -165,3 +167,9 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Import-Export_Script
 
 CPS adjustment menu documentation (translated, explained):  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
+
+--- 
+
+## PCB View
+
+![PCB View](images/pcb.jpg)  
