@@ -173,3 +173,14 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 ## PCB View
 
 ![PCB View](images/pcb.jpg)  
+
+---
+
+## 🧠 Note
+
+Everything tested on a Hiroyasu IC-980Pro Max with Software Version V20251031.01.
+
+---
+
+:copyright:2026, Antonis Maglaras
+
