@@ -11,7 +11,8 @@
 #
 # This is a VERY BETA version. Use it at your own risk.
 # Always verify the generated file in CPS before writing it to the radio.
-
+#
+# Version 1.2b - 5.06.2026 - Fixed import/export bugs
 
 import argparse
 import csv
@@ -20,7 +21,7 @@ from pathlib import Path
 
 RECORD_START = 622
 RECORD_SIZE = 85
-CHANNEL_COUNT = 500	# This is the total memories for IC-980Pro Max
+CHANNEL_COUNT = 500
 
 # main 85-byte channel record offsets
 MAIN_FLAGS_OFF = 0
@@ -121,6 +122,13 @@ def rec_start(idx:int)->int:
 def sig_busy_offset(idx:int)->int:
     return SIG_BUSY_BASE + (idx-1)
 
+# Frequency RX/TX pairs use the same 85-byte stride as channel records,
+# but start exactly one record earlier than the main channel table.
+FREQ_RECORD_START = RECORD_START - RECORD_SIZE  # 537 for this layout
+
+def freq_start(idx:int)->int:
+    return FREQ_RECORD_START + (idx-1)*RECORD_SIZE
+
 def decode_name(b:bytes)->str:
     return b.split(b"\x00",1)[0].decode("ascii","ignore").rstrip()
 
@@ -133,13 +141,13 @@ def fmt_mhz(hz:int)->str:
         return ""
     return f"{hz/1_000_000:.5f}"
 
-def parse_freq(row:dict, primary_key:str, secondary_key:str)->int:
-    primary=(row.get(primary_key,"") or "").strip()
-    secondary=(row.get(secondary_key,"") or "").strip()
-    if primary:
-        return int(round(float(primary)*1_000_000)) if "." in primary else int(float(primary))
-    if secondary:
-        return int(round(float(secondary)*1_000_000)) if "." in secondary else int(float(secondary))
+def parse_freq(row:dict, hz_key:str, mhz_key:str)->int:
+    hz=(row.get(hz_key,"") or "").strip()
+    mhz=(row.get(mhz_key,"") or "").strip()
+    if hz:
+        return int(float(hz))
+    if mhz:
+        return int(round(float(mhz)*1_000_000))
     return 0
 
 def decode_tone(raw3:bytes)->str:
@@ -177,46 +185,56 @@ def encode_tone(text:str)->bytes:
 
 def decode_busy(v:int)->str:
     return BUSY_MAP.get(v & 0x18, f"0x{v&0x18:02X}")
-def encode_busy(text:str, old:int)->int:
-    t_raw=(text or "").strip()
-    t=t_raw.upper()
+def encode_busy(text: str, old: int) -> int:
+    t_raw = (text or "").strip()
+    t = t_raw.upper()
+
     if not t:
         return old
-    inv={v:k for k,v in BUSY_MAP.items()}
+
+    inv = {v: k for k, v in BUSY_MAP.items()}
+
     if t in inv:
         return (old & ~0x18) | inv[t]
-    # Tolerate legacy/debug CSV rows where a raw hex helper byte lands here.
+
+    # allow raw hex (e.g. 0x18)
     if t.startswith("0X"):
         try:
             return int(t, 16) & 0xFF
         except ValueError:
             return old
+
     return old
 
 def decode_rx_signal(v:int)->str:
     return RX_SIGNAL_MAP.get(v & 0x60, f"0x{v&0x60:02X}")
-def encode_rx_signal(text:str, old:int)->int:
-    t=(text or "").strip().upper().replace("_"," ")
-    if not t: return old
-    inv={v:k for k,v in RX_SIGNAL_MAP.items()}
-    return (old & ~0x60) | inv[t]
+def encode_rx_signal(text: str, old: int) -> int:
+    t_raw = (text or "").strip()
+    t = t_raw.upper().replace("_", " ")
+
+    if not t:
+        return old
+
+    inv = {v.upper(): k for k, v in RX_SIGNAL_MAP.items()}
+
+    if t in inv:
+        return (old & ~0x60) | inv[t]
+
+    if t.startswith("0X"):
+        try:
+            return int(t, 16) & 0xFF
+        except ValueError:
+            return old
+
+    return old
 
 def decode_special_dcs(v:int)->str:
     return SPECIAL_DCS_MAP.get(v & 0x0E, f"0x{v&0x0E:02X}")
 def encode_special_dcs(text:str, old:int)->int:
-    t_raw=(text or "").strip()
-    t=t_raw.upper().replace("_"," ")
-    if not t:
-        return old
+    t=(text or "").strip().upper().replace("_"," ")
+    if not t: return old
     inv={v.upper():k for k,v in SPECIAL_DCS_MAP.items()}
-    if t in inv:
-        return (old & ~0x0E) | inv[t]
-    if t_raw.upper().startswith("0X"):
-        try:
-            return (old & ~0x0E) | (int(t_raw, 16) & 0x0E)
-        except ValueError:
-            return old
-    return old
+    return (old & ~0x0E) | inv[t]
 
 def decode_scan(v:int)->str:
     return "ADD" if (v & 0x80) else "DEL"
@@ -300,8 +318,10 @@ def read_row(blob:bytes, idx:int, debug:bool=False)->dict:
     main=rec[MAIN_FLAGS_OFF]
     scramble_raw=rec[SCRAMBLE_RAW_OFF]
     mode_weather=rec[MODE_WEATHER_OFF]
-    rx=int.from_bytes(rec[RX_OFF:RX_OFF+4],"little")
-    tx=int.from_bytes(rec[TX_OFF:TX_OFF+4],"little")
+    fstart=freq_start(idx)
+    freq_rec=blob[fstart:fstart+RECORD_SIZE]
+    rx=int.from_bytes(freq_rec[RX_OFF:RX_OFF+4],"little")
+    tx=int.from_bytes(freq_rec[TX_OFF:TX_OFF+4],"little")
     row={
         "channel_index": idx,
         "name": decode_name(rec[NAME_OFF:NAME_OFF+NAME_LEN]),
@@ -374,127 +394,146 @@ def import_csv(template_file:Path,csv_file:Path,outfile:Path,debug:bool=False):
     blob=bytearray(template_file.read_bytes())
     with csv_file.open("r", newline="", encoding="utf-8") as f:
         rows=list(csv.DictReader(f))
+
     for row in rows:
         if not (row.get("channel_index","") or "").strip():
             continue
+
         idx=int((row.get("channel_index") or "").strip())
         start=rec_start(idx)
         if start+RECORD_SIZE > len(blob):
             raise ValueError(f"record {idx} out of range")
+
         rec=bytearray(blob[start:start+RECORD_SIZE])
         sig_busy=blob[sig_busy_offset(idx)]
 
+        fstart = freq_start(idx)
+        if fstart + RECORD_SIZE > len(blob):
+            raise ValueError(f"frequency record {idx} out of range")
+        freq_rec = bytearray(blob[fstart:fstart+RECORD_SIZE])
+
+        # current interpreted values from the template, so we only patch actual changes
+        current = read_row(bytes(blob), idx, debug=False)
+
         # debug/raw overrides first
         if debug:
-            for key, off in [("main_flags", MAIN_FLAGS_OFF),("scramble_raw",SCRAMBLE_RAW_OFF),("mode_weather",MODE_WEATHER_OFF),("ptt_push_raw",PTT_PUSH_OFF),("ptt_pop_raw",PTT_POP_OFF)]:
+            for key, off in [
+                ("main_flags", MAIN_FLAGS_OFF),
+                ("scramble_raw", SCRAMBLE_RAW_OFF),
+                ("mode_weather", MODE_WEATHER_OFF),
+                ("ptt_push_raw", PTT_PUSH_OFF),
+                ("ptt_pop_raw", PTT_POP_OFF),
+            ]:
                 txt=(row.get(key,"") or "").strip()
                 if txt:
                     rec[off]=int(txt,0)
+
             txt=(row.get("sig_busy","") or "").strip()
             if txt:
                 sig_busy=int(txt,0)
+
             txt=(row.get("extra_flags","") or "").strip()
             if txt:
                 rec[EXTRA_FLAGS_OFF]=int(txt,0)
 
-        # human-editable values
-        # Only apply a field when the CSV explicitly changes it compared to the template.
-        # This keeps full exports/imports safe even when unused rows decode to noisy defaults.
-        cur_name = decode_name(rec[NAME_OFF:NAME_OFF+NAME_LEN])
-        cur_rx_mhz = fmt_mhz(int.from_bytes(rec[RX_OFF:RX_OFF+4], "little"))
-        cur_tx_mhz = fmt_mhz(int.from_bytes(rec[TX_OFF:TX_OFF+4], "little"))
-        cur_tx_power = "High" if (rec[MAIN_FLAGS_OFF] & 0x20) else "Low"
-        cur_bandwidth = "Wide" if (rec[MAIN_FLAGS_OFF] & 0x10) else "Narrow"
-        cur_scan = decode_scan(rec[MAIN_FLAGS_OFF])
-        cur_busy = decode_busy(sig_busy)
-        cur_rx_signal = decode_rx_signal(sig_busy)
-        cur_special_dcs = decode_special_dcs(rec[MAIN_FLAGS_OFF])
-        cur_fm_am = decode_fm_am(rec[MODE_WEATHER_OFF])
-        cur_weather = decode_weather(rec[MODE_WEATHER_OFF])
-        cur_scramble = decode_scramble(rec[SCRAMBLE_RAW_OFF])
-        cur_vague = decode_vague(rec[SCRAMBLE_RAW_OFF])
-        cur_compander = "ON" if (rec[MAIN_FLAGS_OFF] & 0x01) else "OFF"
-        cur_ptt_push = decode_ptt(rec[PTT_PUSH_OFF])
-        cur_ptt_pop = decode_ptt(rec[PTT_POP_OFF])
-        cur_qt_enc = decode_tone(bytes(rec[QT_DQT_ENC_OFF:QT_DQT_ENC_OFF+3]))
-        cur_qt_dec = decode_tone(bytes(rec[QT_DQT_DEC_OFF:QT_DQT_DEC_OFF+3]))
+            enc_hex=(row.get("qt_dqt_enc_hex","") or "").strip()
+            dec_hex=(row.get("qt_dqt_dec_hex","") or "").strip()
+            if enc_hex:
+                rec[QT_DQT_ENC_OFF:QT_DQT_ENC_OFF+3]=bytes.fromhex(enc_hex.replace(" ",""))
+            if dec_hex:
+                rec[QT_DQT_DEC_OFF:QT_DQT_DEC_OFF+3]=bytes.fromhex(dec_hex.replace(" ",""))
 
-        name = (row.get("name") or "").strip()
-        if name and name != cur_name:
-            rec[NAME_OFF:NAME_OFF+NAME_LEN] = encode_name(name)
+        # human-editable values: only write when CSV differs from template/interpreted value
+        name = (row.get("name") or "")
+        if name != "" and name != current["name"]:
+            rec[NAME_OFF:NAME_OFF+NAME_LEN]=encode_name(name)
 
-        rx_text = (row.get("rx_mhz") or "").strip()
-        tx_text = (row.get("tx_mhz") or "").strip()
-        if rx_text and rx_text != cur_rx_mhz:
-            rx = parse_freq(row, "rx_mhz", "rx_hz")
+        rx_txt = (row.get("rx_mhz") or "").strip()
+        tx_txt = (row.get("tx_mhz") or "").strip()
+        if rx_txt and rx_txt != current["rx_mhz"]:
+            rx=parse_freq(row,"rx_hz","rx_mhz")
             if rx:
-                rec[RX_OFF:RX_OFF+4] = rx.to_bytes(4, "little")
-        if tx_text and tx_text != cur_tx_mhz:
-            tx = parse_freq(row, "tx_mhz", "tx_hz")
+                freq_rec[RX_OFF:RX_OFF+4]=rx.to_bytes(4,"little")
+        if tx_txt and tx_txt != current["tx_mhz"]:
+            tx=parse_freq(row,"tx_hz","tx_mhz")
             if tx:
-                rec[TX_OFF:TX_OFF+4] = tx.to_bytes(4, "little")
+                freq_rec[TX_OFF:TX_OFF+4]=tx.to_bytes(4,"little")
 
-        tp = (row.get("tx_power", "") or "").strip()
-        if tp and tp != cur_tx_power:
-            if tp.lower() == "high":
+        tp=(row.get("tx_power","") or "").strip()
+        if tp and tp != current["tx_power"]:
+            if tp.lower()=="high":
                 rec[MAIN_FLAGS_OFF] |= 0x20
-            elif tp.lower() == "low":
+            elif tp.lower()=="low":
                 rec[MAIN_FLAGS_OFF] &= ~0x20
 
-        bw = (row.get("bandwidth", "") or "").strip()
-        if bw and bw != cur_bandwidth:
-            if bw.lower() == "wide":
+        bw=(row.get("bandwidth","") or "").strip()
+        if bw and bw != current["bandwidth"]:
+            if bw.lower()=="wide":
                 rec[MAIN_FLAGS_OFF] |= 0x10
-            elif bw.lower() == "narrow":
+            elif bw.lower()=="narrow":
                 rec[MAIN_FLAGS_OFF] &= ~0x10
 
-        comp = (row.get("compander", "") or "").strip().upper()
-        if comp and comp != cur_compander:
-            if comp == "ON":
+        comp=(row.get("compander","") or "").strip().upper()
+        if comp and comp != current["compander"]:
+            if comp=="ON":
                 rec[MAIN_FLAGS_OFF] |= 0x01
-            elif comp == "OFF":
+            elif comp=="OFF":
                 rec[MAIN_FLAGS_OFF] &= ~0x01
 
-        if (row.get("scan", "") or "").strip() and (row.get("scan", "") or "").strip() != cur_scan:
-            rec[MAIN_FLAGS_OFF] = encode_scan(row.get("scan", ""), rec[MAIN_FLAGS_OFF])
-        if (row.get("special_dcs", "") or "").strip() and (row.get("special_dcs", "") or "").strip() != cur_special_dcs:
-            rec[MAIN_FLAGS_OFF] = encode_special_dcs(row.get("special_dcs", ""), rec[MAIN_FLAGS_OFF])
+        scan=(row.get("scan","") or "").strip()
+        if scan and scan != current["scan"]:
+            rec[MAIN_FLAGS_OFF]=encode_scan(scan, rec[MAIN_FLAGS_OFF])
 
-        if (row.get("busy_inhibit", "") or "").strip() and (row.get("busy_inhibit", "") or "").strip() != cur_busy:
-            sig_busy = encode_busy(row.get("busy_inhibit", ""), sig_busy)
-        if (row.get("rx_signal_code", "") or "").strip() and (row.get("rx_signal_code", "") or "").strip() != cur_rx_signal:
-            sig_busy = encode_rx_signal(row.get("rx_signal_code", ""), sig_busy)
+        special=(row.get("special_dcs","") or "").strip()
+        if special and special != current["special_dcs"]:
+            rec[MAIN_FLAGS_OFF]=encode_special_dcs(special, rec[MAIN_FLAGS_OFF])
 
-        if (row.get("fm_am", "") or "").strip() and (row.get("fm_am", "") or "").strip() != cur_fm_am:
-            rec[MODE_WEATHER_OFF] = encode_fm_am(row.get("fm_am", ""), rec[MODE_WEATHER_OFF])
-        if (row.get("weather_alert", "") or "").strip() and (row.get("weather_alert", "") or "").strip() != cur_weather:
-            rec[MODE_WEATHER_OFF] = encode_weather(row.get("weather_alert", ""), rec[MODE_WEATHER_OFF])
-        if (row.get("vague_subaudio", "") or "").strip() and (row.get("vague_subaudio", "") or "").strip() != cur_vague:
-            rec[SCRAMBLE_RAW_OFF] = encode_vague(row.get("vague_subaudio", ""), rec[SCRAMBLE_RAW_OFF])
-        if (row.get("scramble", "") or "").strip() and (row.get("scramble", "") or "").strip() != cur_scramble:
-            rec[SCRAMBLE_RAW_OFF] = encode_scramble(row.get("scramble", ""), rec[SCRAMBLE_RAW_OFF])
+        busy=(row.get("busy_inhibit","") or "").strip()
+        if busy and busy != current["busy_inhibit"]:
+            sig_busy=encode_busy(busy, sig_busy)
 
-        p = encode_ptt(row.get("ptt_push_code", ""))
-        if p is not None and (row.get("ptt_push_code", "") or "").strip() != cur_ptt_push:
-            rec[PTT_PUSH_OFF] = p
-        p = encode_ptt(row.get("ptt_pop_code", ""))
-        if p is not None and (row.get("ptt_pop_code", "") or "").strip() != cur_ptt_pop:
-            rec[PTT_POP_OFF] = p
+        rxsig=(row.get("rx_signal_code","") or "").strip()
+        if rxsig and rxsig != current["rx_signal_code"]:
+            sig_busy=encode_rx_signal(rxsig, sig_busy)
 
-        enc_hex = (row.get("qt_dqt_enc_hex", "") or "").strip()
-        dec_hex = (row.get("qt_dqt_dec_hex", "") or "").strip()
-        enc_text = (row.get("qt_dqt_enc", "") or "").strip()
-        dec_text = (row.get("qt_dqt_dec", "") or "").strip()
-        if enc_hex:
-            rec[QT_DQT_ENC_OFF:QT_DQT_ENC_OFF+3] = bytes.fromhex(enc_hex.replace(" ", ""))
-        elif enc_text and enc_text != cur_qt_enc:
-            rec[QT_DQT_ENC_OFF:QT_DQT_ENC_OFF+3] = encode_tone(enc_text)
-        if dec_hex:
-            rec[QT_DQT_DEC_OFF:QT_DQT_DEC_OFF+3] = bytes.fromhex(dec_hex.replace(" ", ""))
-        elif dec_text and dec_text != cur_qt_dec:
-            rec[QT_DQT_DEC_OFF:QT_DQT_DEC_OFF+3] = encode_tone(dec_text)
+        fmam=(row.get("fm_am","") or "").strip()
+        if fmam and fmam != current["fm_am"]:
+            rec[MODE_WEATHER_OFF]=encode_fm_am(fmam, rec[MODE_WEATHER_OFF])
+
+        weather=(row.get("weather_alert","") or "").strip()
+        if weather and weather != current["weather_alert"]:
+            rec[MODE_WEATHER_OFF]=encode_weather(weather, rec[MODE_WEATHER_OFF])
+
+        vague=(row.get("vague_subaudio","") or "").strip()
+        if vague and vague != current["vague_subaudio"]:
+            rec[SCRAMBLE_RAW_OFF]=encode_vague(vague, rec[SCRAMBLE_RAW_OFF])
+
+        scramble=(row.get("scramble","") or "").strip()
+        if scramble and scramble != current["scramble"]:
+            rec[SCRAMBLE_RAW_OFF]=encode_scramble(scramble, rec[SCRAMBLE_RAW_OFF])
+
+        push=(row.get("ptt_push_code","") or "").strip()
+        if push and push != current["ptt_push_code"]:
+            p=encode_ptt(push)
+            if p is not None:
+                rec[PTT_PUSH_OFF]=p
+
+        pop=(row.get("ptt_pop_code","") or "").strip()
+        if pop and pop != current["ptt_pop_code"]:
+            p=encode_ptt(pop)
+            if p is not None:
+                rec[PTT_POP_OFF]=p
+
+        enc_text=(row.get("qt_dqt_enc","") or "").strip()
+        if enc_text and enc_text != current["qt_dqt_enc"]:
+            rec[QT_DQT_ENC_OFF:QT_DQT_ENC_OFF+3]=encode_tone(enc_text)
+
+        dec_text=(row.get("qt_dqt_dec","") or "").strip()
+        if dec_text and dec_text != current["qt_dqt_dec"]:
+            rec[QT_DQT_DEC_OFF:QT_DQT_DEC_OFF+3]=encode_tone(dec_text)
 
         blob[start:start+RECORD_SIZE]=rec
+        blob[fstart:fstart+RECORD_SIZE]=freq_rec
         blob[sig_busy_offset(idx)] = sig_busy
 
     outfile.write_bytes(blob)
