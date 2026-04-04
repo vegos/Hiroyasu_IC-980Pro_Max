@@ -152,6 +152,13 @@
 
 ---
 
+## RF Power Measurements
+
+Power mesurements with dummy load (actual power) and with antenna:  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Measurements
+
+---
+
 ## Tool for Memory Management
 
 You can use the Python script:  
