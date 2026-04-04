@@ -7,3 +7,5 @@
 | 435 MHz   | UHF    | Low   | 10.6 W       | ~1.15               | ~1.37         | 👍 Good         |
 | 435 MHz   | UHF    | High  | 22 W         | ~1.05               | ~1.37         | 👍 Very Good    |
 | 446 MHz   | PMR    | High  | 25 W         | ~1.7–1.8            | ~1.84         | :warning: Out Of Tuning |
+
+:mag_right: Note: Antenna is a Diamond VX-50, Coax is Hyperflex 5. Two chokes with FT240-43 ferrites on both ends.
