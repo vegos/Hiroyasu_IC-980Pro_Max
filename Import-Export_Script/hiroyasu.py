@@ -12,7 +12,7 @@
 # This is a VERY BETA version. Use it at your own risk.
 # Always verify the generated file in CPS before writing it to the radio.
 #
-# Version 1.2b - 5.06.2026 - Fixed import/export bugs
+# Version 1.2b - 5/06/2026 - Fixed import/export bugs
 
 import argparse
 import csv
