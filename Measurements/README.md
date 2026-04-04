@@ -1,4 +1,7 @@
 # Measurements for the Hiroyasu IC-980Pro Max
+> Real-world measured output power. No marketing numbers.
+
+---
 
 | Frequency | Band   | Power | RF Power (W)<br/>(Nissei RX-503 - Antenna) | RF Power (W)<br>(Nissei RX-503 - Dummy Load) | SWR<br/>(Nissei RX-503) |  SWR<br/>(NanoVNA) | Comment          |
 | --------- | ------ | ----- | ------------ | ------------------- | ------------- | --------------- | -- |
