@@ -3,7 +3,7 @@
 | Frequency | Band   | Power | RF Power (W)<br/>(Nissei RX-503 - Antenna) | RF Power (W)<br>(Nissei RX-503 - Dummy Load) | SWR<br/>(Nissei RX-503) |  SWR<br/>(NanoVNA) | Comment          |
 | --------- | ------ | ----- | ------------ | ------------------- | ------------- | --------------- | -- |
 | 145 MHz   | VHF    | Low   | 7.1 W        | 7.4W | ~1.1–1.2            | ~1.32         | 🔥 Very Good    |
-| 145 MHz   | VHF    | High  | 29 W         | 23W |   ~1.2–1.3            | ~1.32         | 👍 Stable      |
+| 145 MHz   | VHF    | High  | 20 W         | 23W |   ~1.2–1.3            | ~1.32         | 👍 Stable      |
 | 435 MHz   | UHF    | Low   | 9.8 W        | 9.9W |  ~1.15               | ~1.37         | 👍 Good         |
 | 435 MHz   | UHF    | High  | 24 W         | 22 W |  ~1.05               | ~1.37         | 🔥 Very Good    |
 | 446 MHz   | PMR    | High  | 17 W         | Not Measured |  ~1.7–1.8            | ~1.84         | :warning: Warning |
