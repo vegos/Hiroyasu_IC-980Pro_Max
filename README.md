@@ -132,7 +132,9 @@
 
   and both receive:
 
-  - B side **does not show any signal**
+  - B side **does not show any signal**  
+  
+> :mute: Even with MONI pressed, no signal can be heard.
 
 ---
 
