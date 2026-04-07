@@ -23,6 +23,19 @@
 
 ---
 
+## :thermometer: Thermal Photos / Temperatures (not accurate but relative)
+
+Thermal photo when receiving  
+
+![When RX](images/WhenRX.jpg) 
+
+
+Thermal photo when transmitting
+
+![When TX](images/WhenTX.jpg)
+
+---
+
 ## :pushpin: Measurement Setup
 
 - Antenna: Diamond VX50
