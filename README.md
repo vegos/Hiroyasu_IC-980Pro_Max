@@ -4,9 +4,9 @@
 
 ## 🆕 Upgraded Features (IC-980Pro Max)
 
-- FM/AM modulation (AM receive only)
+- FM/AM modulation (AM receive only[^1])
 - Electronic relay (silent operation, no clicking in dual watch)
-- True dual receive (V/U bands simultaneously)
+- True dual receive (V/U bands simultaneously)[^2]
 - Dual band display / watch / receive
 - FSK & DTMF signaling support
 - FM Radio Resume (FMR)
@@ -113,7 +113,7 @@
 
 ## ⚠️ Known Limitations
 
-### AM Mode
+### AM Mode [^1]
 
 - AM is receive-only and not a true hardware demodulator  
 - Likely implemented via DSP/software processing  
@@ -154,14 +154,14 @@
 
 ---
 
-## RF Power Measurements
+## :satellite: RF Power Measurements
 
 Power mesurements with dummy load (actual power) and with antenna:  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Measurements
 
 ---
 
-## Tool for Memory Management
+## :computer: Tool for Memory Management
 
 You can use the Python script:  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Import-Export_Script
@@ -172,14 +172,14 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Import-Export_Script
 
 ---
 
-## Adjustment Menu
+## :wrench: Adjustment Menu
 
 CPS adjustment menu documentation (translated, explained):  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 
 --- 
 
-## PCB View
+## :camera: PCB View
 
 ![PCB View](images/pcb.jpg)  
 
@@ -191,5 +191,10 @@ Everything tested on a Hiroyasu IC-980Pro Max with Software Version V20251031.01
 
 ---
 
-:copyright:2026, Antonis Maglaras
+:copyright:2026, Antonis Maglaras  
 
+[^1]: AM reception is not implemented via a proper hardware demodulator.  
+Likely derived from the FM signal path via software processing.  
+Audio quality is very poor.  
+
+[^2]: Actually there is a bug? in firmware that when two signals are received simultaneously, audio is muted on both channels.  
