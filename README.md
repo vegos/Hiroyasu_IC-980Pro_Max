@@ -181,7 +181,7 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 
 ## 🔊 Audio Recordings
 
-Some audio recordings:  
+Some audio recordings in various bands/modulations:  
 https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Recordings
 
 ---
