@@ -179,6 +179,13 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 
 --- 
 
+## 🔊 Audio Recordings
+
+Some audio recordings:  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Recordings
+
+---
+
 ## :camera: PCB View
 
 ![PCB View](images/pcb.jpg)  
