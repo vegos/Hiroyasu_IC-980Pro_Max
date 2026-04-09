@@ -1,4 +1,4 @@
-# Hiroyasu IC-980Pro Max - Specifications & Features
+# Hiroyasu IC-980Pro Max
 
 ![Hiroyasu IC-980Pro Max](images/IC-980Pro_Max.jpg)  
 
