@@ -119,11 +119,10 @@ After the modification, the audio characteristics changed noticeably:
 This is a simple but effective modification that significantly improves microphone audio quality.
 It requires minimal components, but careful handling due to the pin mismatch.
 
-Compared to the stock capsule, the EM258 provides:
-
-Higher S/N ratio (less background noise)
-Flatter frequency response
-More natural voice reproduction
+Compared to the stock capsule, the EM258 provides:  
+Higher S/N ratio (less background noise)  
+Flatter frequency response  
+More natural voice reproduction  
 
 👉 In practice, this results in a more “hi-fi” audio.
 
