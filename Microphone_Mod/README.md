@@ -2,7 +2,7 @@
 
 ## Replacement of Electret Capsule with Primo EM258
 
-This project documents the replacement of the stock electret microphone capsule in a Hiroyasu HM-158 mobile radio microphone with a higher-quality **Primo EM258** capsule.
+This project documents the replacement of the stock electret microphone capsule in a Hiroyasu HM-18 mobile radio microphone (from the Hiroyasu IC-980Pro Max)) with a higher-quality **Primo EM258** capsule.
 
 ---
 
