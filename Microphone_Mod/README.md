@@ -8,26 +8,40 @@ This project documents the replacement of the stock electret microphone capsule 
 
 ## 📸 Images
 
-* Microphone and Primo EM258 capsules  
+* Microphone and Primo EM258 capsules
+
   ![Parts](images/R1001497.jpg)
 
-* Original factory electret capsule (before modification)  
+
+* Original factory electret capsule (before modification)
+
   ![Original](images/R1001498.jpg)
 
-* Side-by-side comparison (original vs Primo EM258)  
+
+* Side-by-side comparison (original vs Primo EM258)
+
   ![Side by side](images/R1001499.jpg)
 
-* New capsule, mechanical fit (perfect match in size)  
+
+* New capsule, mechanical fit (perfect match in size)
+
   ![Ready](images/R1001500.jpg)
 
-* New capsule installed on PCB  
+
+* New capsule installed on PCB
+
   ![Installed](images/R1001501.jpg)
 
-* Back side of the PCB  
+
+* Back side of the PCB
+
   ![Back](images/R1001504.jpg)
 
-* Front side of the PCB  
+
+* Front side of the PCB
+
   ![Front](images/R1001505.jpg)
+
 
 ---
 
@@ -112,6 +126,23 @@ It requires minimal components, but careful handling due to the pin mismatch.
 * Primo EM258 electret microphone capsule
 * 0.3 mm enamel wire
 
+---
+
+## 📊 Specifications (Primo EM258)
+
+The Primo EM258 is a high-quality electret condenser microphone capsule with the following key characteristics:  
+  
+Directional Pattern: Omni-directional  
+Sensitivity: -32 dB ± 3 dB (at 1 kHz, 0 dB = 1 V/Pa)  
+Impedance: 1.6 kΩ ± 30% (at 1 kHz)  
+Signal-to-Noise Ratio: 74 dB (A-weighted)  
+Operating Voltage: 3 V  
+Current Consumption: ≤ 550 µA  
+Maximum SPL: 115 dB  
+Weight: ~0.13 g  
+  
+According to the manufacturer ![datasheet](./Primo_EM258_Datasheet.pdf), the capsule offers high sensitivity and low noise performance, making it suitable for applications where improved audio quality is desired over typical communication-grade capsules.
+  
 ---
 
 ## 📎 Disclaimer
