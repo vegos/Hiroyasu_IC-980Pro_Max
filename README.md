@@ -179,7 +179,14 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 
 Also you'll find a translated version of the CPS executable file for download.  
   
---- 
+---
+
+## :toolbox: Microphone Modification
+
+Replacement of the electret microphone capsule with a higher quality (Primo EM258):  
+https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/Microphone_Mod
+
+---
 
 ## 🔊 Audio Recordings
 
