@@ -1,4 +1,4 @@
-# Hiroyasu HM-158 Microphone Mod
+# Hiroyasu HM-18 Microphone Mod
 
 ## Replacement of Electret Capsule with Primo EM258
 
