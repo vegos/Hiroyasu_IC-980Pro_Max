@@ -123,17 +123,9 @@
 
 ### Dual Watch Issues
 
-- If both A and B receive simultaneously (channel mode):
+- If both A and B receive simultaneously:
   - **Audio is completely muted**
 
-- If:
-  - A = channel mode  
-  - B = VFO mode  
-
-  and both receive:
-
-  - B side **does not show any signal**  
-  
 > :mute: Even with MONI pressed, no signal can be heard.
 
 ---
@@ -143,6 +135,7 @@
 - Works only as:
   - OFF or FULL
 - Does not show real RSSI levels
+- *TODO: This might be fixed by ajdusting/fine-tuning the SQ values in the Adjustment menu using the CPS*
 
 ---
 
