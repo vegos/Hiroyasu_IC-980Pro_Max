@@ -28,11 +28,27 @@
 Thermal photo when receiving  
 
 ![When RX](images/WhenRX.jpg) 
-
-
+  
+  
 Thermal photo when transmitting
 
 ![When TX](images/WhenTX.jpg)
+  
+  
+Voltage Regulator KIA7805AF (Idle, RX, no signal)  
+
+![Idle](images/Idle.jpg)  
+  
+  
+Transmitting  
+
+![TX](images/TX1.jpg)
+  
+  
+Transmitting  
+
+![TX](images/TX2.jpg)
+
 
 ---
 
