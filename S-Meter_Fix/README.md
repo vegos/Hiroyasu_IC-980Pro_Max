@@ -27,13 +27,13 @@ If they are not aligned with the actual RF front-end behavior, the meter saturat
 
 ## 🛠️ Calibration Method (Practical Approach)
 
-A simple 3-point calibration was performed using the built-in **Read Status** function.
+A simple 3-point calibration was performed using the built-in **Read Radio Status** function.
 
 ### Step 1 — Baseline (No Antenna)
 
 1. Disconnect the antenna
-2. Press **Read Status**
-3. Note the **Signal** value
+2. Press **Read Radio Status** (读取机子状态)[^1]
+3. Note the **Signal Strength** (信号强度) value
 
 ➡ This represents the **noise floor / minimum input level**
 
@@ -140,3 +140,5 @@ the S-meter becomes **usable and more realistic**.
 
 ✔ Working  
 🔧 Open to improvements
+
+[^1]: Take a look here for translations and using the Adjustment menu of the CPS: https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
