@@ -11,7 +11,7 @@ This makes the S-meter practically unusable for real-world signal estimation.
 
 ---
 
-## 🔍 Root Cause (Assumption)
+## 🔍Probable Cause
 
 The issue appears to be related to improperly configured squelch/threshold levels:
 
@@ -31,7 +31,12 @@ A simple 3-point calibration was performed using the built-in **Read Radio Statu
 
 ![CPS Menu](images/CPS_Status.png)  
 ![CPS Menu](images/CPS_Status2.png)  
-  
+
+> The "Signal" value read from CPS appears to be an internal RSSI-like metric  
+> (0–255 scale), used by the firmware to drive squelch and S-meter behavior.  
+
+---
+
 ### Step 1 — Baseline (No Antenna)
 
 1. Disconnect the antenna
@@ -143,5 +148,12 @@ the S-meter becomes **usable and more realistic**.
 
 ✔ Working  
 🔧 Open to improvements
+
+---
+
+## ⚠️ Note
+
+**Always read and back up the current values before modifying any settings.**
+
 
 [^1]: Take a look here for translations and using the Adjustment menu of the CPS: https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
