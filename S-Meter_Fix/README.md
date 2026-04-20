@@ -25,6 +25,12 @@ If they are not aligned with the actual RF front-end behavior, the meter saturat
 
 ---
 
+## ⚠️ Note
+
+**Always read and back up the current values before modifying any settings.**
+
+---
+
 ## 🛠️ Calibration Method (Practical Approach)
 
 A simple 3-point calibration was performed using the built-in **Read Radio Status** function.  
@@ -148,12 +154,5 @@ the S-meter becomes **usable and more realistic**.
 
 ✔ Working  
 🔧 Open to improvements
-
----
-
-## ⚠️ Note
-
-**Always read and back up the current values before modifying any settings.**
-
 
 [^1]: Take a look here for translations and using the Adjustment menu of the CPS: https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
