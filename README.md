@@ -135,7 +135,11 @@
 - Works only as:
   - OFF or FULL
 - Does not show real RSSI levels
-- *TODO: This might be fixed by ajdusting/fine-tuning the SQ values in the Adjustment menu using the CPS*
+
+- *Temporary Fix Available:*  
+  [This might be fixed by ajdusting/fine-tuning the SQ values in the Adjustment menu using the CPS](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/blob/main/S-Meter_Fix/README.md)  
+  *It's not calibrated, but readings are comparable now.  
+  Work-in-progress to make it more accurate.*
 
 ---
 
