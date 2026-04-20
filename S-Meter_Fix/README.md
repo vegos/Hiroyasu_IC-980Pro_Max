@@ -25,7 +25,7 @@ If they are not aligned with the actual RF front-end behavior, the meter saturat
 
 ---
 
-## ⚠️ Note
+## ⚠️ Warning
 
 **Always read and back up the current values before modifying any settings.**
 
