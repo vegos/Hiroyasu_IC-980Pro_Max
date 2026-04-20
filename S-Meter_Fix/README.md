@@ -27,8 +27,11 @@ If they are not aligned with the actual RF front-end behavior, the meter saturat
 
 ## 🛠️ Calibration Method (Practical Approach)
 
-A simple 3-point calibration was performed using the built-in **Read Radio Status** function.
+A simple 3-point calibration was performed using the built-in **Read Radio Status** function.  
 
+![CPS Menu](images/CPS_Status.png)  
+![CPS Menu](images/CPS_Status2.png)  
+  
 ### Step 1 — Baseline (No Antenna)
 
 1. Disconnect the antenna
