@@ -4,9 +4,9 @@
 
 ## 🆕 Upgraded Features (IC-980Pro Max)
 
-- FM/AM modulation (AM receive only[^1])
+- FM/AM modulation (AM receive only [^1])
 - Electronic relay (silent operation, no clicking in dual watch)
-- True dual receive (V/U bands simultaneously)[^2]
+- True dual receive (V/U bands simultaneously) [^2]
 - Dual band display / watch / receive
 - FSK & DTMF signaling support
 - FM Radio Resume (FMR)
@@ -102,7 +102,7 @@
 
 ## 📶 Transmission Specifications
 
-- Output Power: 25W / 20W (VHF/UHF)[^3]  
+- Output Power: 25W / 20W (VHF/UHF) [^3]  
 - Modulation: 16K0F3E (Wide, 25kHz), 11K0F3E (Narrow, 12.5kHz)  
 - Adjacent Channel Power: ≥70 dB / ≥60 dB  
 - Signal-to-noise ratio: ≥40 dB  
