@@ -74,7 +74,7 @@
 
 - Frequency Range (EU): VHF 144–146 MHz, UHF 430–440 MHz  
   (Note: it can be expanded)
-- Frequency Range (USA): VHF 144–148 MHz, UHF 420–450 MHz  
+- Frequency Range: VHF 144–148 MHz, UHF 420–450 MHz  
   (Note: it can be expanded)
 - Channels: 500  
 - Channel Spacing: 25 kHz (Wide), 12.5 kHz (Narrow)  
@@ -102,7 +102,7 @@
 
 ## 📶 Transmission Specifications
 
-- Output Power: 25W / 20W (VHF/UHF)  
+- Output Power: 25W / 20W (VHF/UHF)[^3]  
 - Modulation: 16K0F3E (Wide, 25kHz), 11K0F3E (Narrow, 12.5kHz)  
 - Adjacent Channel Power: ≥70 dB / ≥60 dB  
 - Signal-to-noise ratio: ≥40 dB  
@@ -211,3 +211,5 @@ Likely derived from the FM signal path via software processing.
 Audio quality is very poor.  
 
 [^2]: Actually there is a bug? in firmware that when two signals are received simultaneously, audio is muted on both channels.  
+
+[^3]: Real-world measurements can be found [here](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/blob/main/Measurements/README.md).  
