@@ -103,7 +103,7 @@
 ## 📶 Transmission Specifications
 
 - Output Power: 25W / 20W (VHF/UHF)  
-- Modulation: 16KΦF3E (Wide), 11KΦF3E (Narrow)  
+- Modulation: 16K0F3E (Wide, 25kHz), 11K0F3E (Narrow, 12.5kHz)  
 - Adjacent Channel Power: ≥70 dB / ≥60 dB  
 - Signal-to-noise ratio: ≥40 dB  
 - Spurious & Harmonics: ≥60 dB  
