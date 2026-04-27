@@ -150,6 +150,18 @@ the S-meter becomes **usable and more realistic**.
 
 ---
 
+## :red_circle: Calibrated Values
+
+SP91EH precisely calibrated values using signal generator:  
+
+```
+SQ-1: 111  
+SQ-5: 160  
+SQ-9: 210
+```
+
+---
+
 ## 🚀 Status
 
 ✔ Working  
