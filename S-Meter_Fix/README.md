@@ -2,9 +2,7 @@
 
 ## Overview
 
-The original calibration procedure was proposed by **SP6PW** in the GitHub discussion below:
-
-https://github.com/vegos/Hiroyasu_IC-980Pro_Max/issues/1
+The original calibration procedure was proposed by **SP6PW** in the GitHub [discussion](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/issues/1).
 
 This document describes the calibration procedure that was followed, together with the measured results obtained on **my own radio**.
 
