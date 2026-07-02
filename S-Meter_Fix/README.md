@@ -54,7 +54,7 @@ This document describes the calibration procedure that was followed, together wi
 * FM Deviation: **3.0 kHz**
 * External Gain: **-70 dB**
 
-The TinySA output was connected directly to the radio antenna connector through two fixed attenuators (30 dB + 40 dB, total 70dB).
+The TinySA output was connected directly to the radio antenna connector through two fixed attenuators (30 dB + 40 dB, total 70 dB).
 
 ![TinySA settings](images/TinySA.jpg)  
 
@@ -192,9 +192,9 @@ These values were observed **before** calibration (using my old/*rough calibrati
 
 # Observations
 
-* The calibration procedure proposed by **SP6PW** works correctly.
+* The calibration procedure proposed by **[pawol](https://github.com/pawol)/SP6PW** works correctly.
 * The resulting calibration values differ from those measured on SP6PW's radio.
-* This indicates that calibration is **radio-specific**. It might used for just a start point.
+* This indicates that calibration is **radio-specific**. The values may only be useful as a starting point.
 * **SQ-1** must be adjusted manually based on the displayed S-meter.
 * **SQ-5** and **SQ-9** matched the values obtained from the CPS **Read Status → Signal** field.
 * The calibration was successfully verified on **both 145 MHz and 435 MHz**.
