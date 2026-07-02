@@ -2,7 +2,7 @@
 
 ## Overview
 
-The original calibration procedure was proposed by **[pawol](https://github.com/pawol)/SP6PW** in the GitHub [discussion](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/issues/1).
+The original calibration procedure was proposed by **[pawol](https://github.com/pawol)/[SP6PW](https://www.qrz.com/db/SP6PW)** in the GitHub [discussion](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/issues/1).
 
 This document describes the calibration procedure that was followed, together with the measured results obtained on **my own radio**.
 
@@ -192,7 +192,7 @@ These values were observed **before** calibration (using my old/*rough calibrati
 
 # Observations
 
-* The calibration procedure proposed by **[pawol](https://github.com/pawol)/SP6PW** works correctly.
+* The calibration procedure proposed by **[pawol](https://github.com/pawol)/[SP6PW](https://www.qrz.com/db/SP6PW)** works correctly.
 * The resulting calibration values differ from those measured on SP6PW's radio.
 * This indicates that calibration is **radio-specific**. The values may only be useful as a starting point.
 * **SQ-1** must be adjusted manually based on the displayed S-meter.
@@ -209,3 +209,11 @@ After calibration, the S-meter behaves significantly better than the factory con
 Instead of switching almost directly from no indication to full scale, the radio now displays intermediate signal levels consistently across both VHF and UHF.
 
 Although the upper part of the display remains compressed due to firmware behavior, the resulting calibration provides a much more useful and realistic indication of received signal strength.
+  
+---
+  
+## Related Documentation
+
+- 📊 [RF Power Measurements](../Measurements/README.md)
+- ⚙️ [CPS Explained](../CPS_Explained/README.md)
+- 🐍 [Import / Export Tool](../Import-Export_Script/README.md)
