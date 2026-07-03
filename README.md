@@ -136,11 +136,9 @@
   - OFF or FULL
 - Does not show real RSSI levels
 
-- *Temporary Fix Available:*  
+- *Fix Available:*  
   [This might be fixed by ajdusting/fine-tuning the SQ values in the Adjustment menu using the CPS](https://github.com/vegos/Hiroyasu_IC-980Pro_Max/blob/main/S-Meter_Fix/README.md)  
-  *It's not calibrated, but readings are comparable now.  
-  Work-in-progress to make it more accurate.*
-
+  
 ---
 
 ## 🧠 Notes
@@ -177,6 +175,13 @@ https://github.com/vegos/Hiroyasu_IC-980Pro_Max/tree/main/CPS_Explained
 Also you'll find a translated version of the CPS executable file for download.  
   
 ---
+
+## :radio: S-Meter Fix
+
+  Calibration procedure based on pawol/SP6PW proposal.
+  https://github.com/vegos/Hiroyasu_IC-980Pro_Max/blob/main/S-Meter_Fix
+  *Important: Calibration values are radio-specific and should not be copied blindly. Always calibrate your own unit.*
+
 
 ## :toolbox: Microphone Modification
 
