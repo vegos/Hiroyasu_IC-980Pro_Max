@@ -222,7 +222,7 @@ Therefore, this calibration should currently be considered a **work in progress*
 
 After the initial calibration was completed, additional experiments were performed to better understand how the radio's internal **CPS Signal** value relates to both laboratory-generated and real off-air signals.
 
-## 1. Generator Reference Measurements
+## 1. Controlled Generator Measurements
 
 The Hiroyasu receiver was fed directly from the TinySA Ultra+ signal generator using the following setup:
 
@@ -254,9 +254,11 @@ These measurements were repeatable and provide a good reference for the receiver
 
 ---
 
-## 2. Off-Air Correlation
+## 2. Real Off-Air Measurements
 
-The following setup was then used to compare real received signals.
+The TinySA was connected as a spectrum analyzer through the same passive splitter as the Hiroyasu, therefore both receivers observed the same antenna signal simultaneously.  
+  
+The following setup was then used to compare real received signals.  
 
 ```
                 Diamond VX50
@@ -270,9 +272,9 @@ The following setup was then used to compare real received signals.
       (Spectrum Analyzer)    (RX)
 ```
 
-The TinySA was configured in **Spectrum Analyzer**, **Zero Span**, with **RBW = 3 kHz** (**Gain 0 dB**, **Reference Level -30 dB**, **LNA Off**).
+The TinySA was configured in **Spectrum Analyzer**, **Zero Span**, with **RBW = 3 kHz** (**Gain 0 dB**, **Reference Level -30 dB**, **LNA Off**).  
 
-Typical measured values:
+Typical measured values:  
 
 | tinySA Level | CPS Signal |
 |-------------:|-----------:|
@@ -284,9 +286,9 @@ Typical measured values:
 | ~-90 dBm | ~183 |
 | ~-83…-81 dBm | ~198–200 |
 
-These measurements should be considered approximate.
+These measurements should be considered approximate.  
 
-Real received signals naturally fluctuate by approximately **±1–2 dB** due to:
+Real received signals naturally fluctuate by approximately **±1–2 dB** due to:  
 
 - fading
 - multipath propagation
@@ -295,6 +297,21 @@ Real received signals naturally fluctuate by approximately **±1–2 dB** due to
 - TinySA averaging
 
 ---
+
+## CPS Signal Values vs RF Level
+
+The graph below summarizes all measurements collected during this investigation.
+
+Two datasets are shown:
+
+- **Blue:** Controlled TinySA generator measurements.
+- **Red:** Real off-air measurements using the Diamond VX50 antenna and TinySA Ultra+ as a spectrum analyzer.
+
+The comparison illustrates that the CPS **Signal** value is not a direct linear representation of the received RF level. It also shows the expected difference between laboratory-generated signals and real off-air reception.
+
+![CPS Signal vs RF Level](images/CPSSignal_vs_RFLevel.png)
+
+--
 
 ## Comparison with Other Receivers
 
@@ -353,7 +370,7 @@ Generator measurements should therefore be considered the controlled laboratory 
 
 This is expected, since real FM signals include modulation, fading, receiver AGC and varying signal-to-noise ratios.
 
-Generator measurements should therefore be considered the primary reference, while off-air measurements better represent real operating conditions.
+Generator measurements provide a controlled reference, while off-air measurements represent actual operating conditions. Both are useful, but they should not be directly compared.
 
 ---
 
