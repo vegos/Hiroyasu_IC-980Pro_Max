@@ -202,42 +202,7 @@ These values were observed **before** calibration (using my old/*rough calibrati
 
 ---
 
-## Comparison with Other Receivers
-
-The following measurements were performed using the **same TinySA Ultra+ generator setup** and the **same 70 dB attenuation chain** (at 145.000MHz).
-
-These results are intended only as a comparison between different receiver S-meter implementations. They should **not** be considered absolute laboratory measurements.
-
-| TinySA Output | Hiroyasu IC-980Pro Max | Quansheng UV-K1* | Alinco DJ-X30E | Yaesu VX-3 |
-|--------------:|------------------------|------------------|----------------|------------|
-| Noise floor | — | -125...-126 dBm (S3) | No bars | 2 bars |
-| -135 dBm | S2 | -123...-125 dBm (S3/S4) | No bars | 2 bars |
-| -129 dBm | S3 | — | 1 bar (barely visible) | 2 bars |
-| -123 dBm | S4 | — | 1 bar | 2 bars |
-| -117 dBm | S5 | -111 dBm (S6) | 2 bars | 2 bars |
-| -111 dBm | ~S6 | -106 dBm (S6) | 4 bars | 2 bars |
-| -105 dBm | ~S7 | -100 dBm (S7) | Full scale | 2 bars |
-| -103 dBm | S8 | — | Full scale | ~2–3 bars |
-| -101 dBm | — | — | — | 3 bars |
-| -99 dBm | — | -93 dBm (S9) | Full scale | 3 bars |
-| -98 dBm | — | — | — | 4 bars |
-| -95 dBm | — | — | Full scale | 5 bars (stabilizes at -94 dBm) |
-| -94 dBm | — | — | Full scale | 5 bars (stable) |
-| -93 dBm | MAX | -87 dBm (S9) | Full scale | 5 bars |
-| -91 dBm | MAX | — | Full scale | 6 bars (maximum) |
-
-\* The UV-K1 was running [Armel's](https://github.com/armel) [v5.6.1 firmware](https://github.com/armel/uv-k1-k5v3-firmware-custom/releases/tag/v5.6.1) displaying both RSSI (dBm) and S-meter.
-
-### Notes
-
-- Different manufacturers implement S-meters differently.
-- The Hiroyasu calibration described in this document aligns the internal thresholds with known RF levels.
-- It does **not** guarantee identical S-meter behaviour compared to other radios.
-- The Yaesu, Alinco and Quansheng receivers all showed significantly different S-meter scaling despite receiving the same RF signal level.
-
----
-
-# Conclusion
+# Current Conclusions
 
 After calibration, the S-meter behaves significantly better than the factory configuration.
 
@@ -325,9 +290,46 @@ Real received signals naturally fluctuate by approximately **±1–2 dB** due to
 
 - fading
 - multipath propagation
-- voice modulation
+- FM modulation
 - receiver AGC
 - TinySA averaging
+
+---
+
+## Comparison with Other Receivers
+
+The comparison below illustrates that S-meter implementations differ significantly between manufacturers, even when measuring the same RF signal level.  
+
+The following measurements were performed using the **same TinySA Ultra+ generator setup** and the **same 70 dB attenuation chain** (at 145.000MHz).
+
+These results are intended only as a comparison between different receiver S-meter implementations. They should **not** be considered absolute laboratory measurements.
+
+| TinySA Output | Hiroyasu IC-980Pro Max | Quansheng UV-K1* | Alinco DJ-X30E | Yaesu VX-3 |
+|--------------:|------------------------|------------------|----------------|------------|
+| Noise floor | — | -125...-126 dBm (S3) | No bars | 2 bars |
+| -135 dBm | S2 | -123...-125 dBm (S3/S4) | No bars | 2 bars |
+| -129 dBm | S3 | — | 1 bar (barely visible) | 2 bars |
+| -123 dBm | S4 | — | 1 bar | 2 bars |
+| -117 dBm | S5 | -111 dBm (S6) | 2 bars | 2 bars |
+| -111 dBm | ~S6 | -106 dBm (S6) | 4 bars | 2 bars |
+| -105 dBm | ~S7 | -100 dBm (S7) | Full scale | 2 bars |
+| -103 dBm | S8 | — | Full scale | ~2–3 bars |
+| -101 dBm | — | — | — | 3 bars |
+| -99 dBm | — | -93 dBm (S9) | Full scale | 3 bars |
+| -98 dBm | — | — | — | 4 bars |
+| -95 dBm | — | — | Full scale | 5 bars (stabilizes at -94 dBm) |
+| -94 dBm | — | — | Full scale | 5 bars (stable) |
+| -93 dBm | MAX | -87 dBm (S9) | Full scale | 5 bars |
+| -91 dBm | MAX | — | Full scale | 6 bars (maximum) |
+
+\* The UV-K1 was running [Armel's](https://github.com/armel) [v5.6.1 firmware](https://github.com/armel/uv-k1-k5v3-firmware-custom/releases/tag/v5.6.1) displaying both RSSI (dBm) and S-meter.
+
+### Notes
+
+- Different manufacturers implement S-meters differently.
+- The Hiroyasu calibration described in this document aligns the internal thresholds with known RF levels.
+- It does **not** guarantee identical S-meter behaviour compared to other radios.
+- The Yaesu, Alinco and Quansheng receivers all showed significantly different S-meter scaling despite receiving the same RF signal level.
 
 ---
 
@@ -347,7 +349,7 @@ Some RF ranges produce large changes in the Signal value, while others show obvi
 
 ### Generator vs Off-Air
 
-The generator measurements and the real off-air measurements do **not** produce identical CPS Signal values.
+Generator measurements should therefore be considered the controlled laboratory reference, while off-air measurements better represent real operating conditions.  
 
 This is expected, since real FM signals include modulation, fading, receiver AGC and varying signal-to-noise ratios.
 
