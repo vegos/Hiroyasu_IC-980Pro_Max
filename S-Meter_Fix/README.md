@@ -18,7 +18,8 @@ This document describes the calibration procedure that was followed, together wi
 
 ## ⚠️ Note
 
-**Always read first the current service values and save them as a backup before making any changes.**
+**Always read and save the current service values before making any changes.**  
+Otherwise, your radio may become nothing more than a very expensive doorstop.
 
 ---
 
@@ -307,11 +308,11 @@ Two datasets are shown:
 - **Blue:** Controlled TinySA generator measurements.
 - **Red:** Real off-air measurements using the Diamond VX50 antenna and TinySA Ultra+ as a spectrum analyzer.
 
-The comparison illustrates that the CPS **Signal** value is not a direct linear representation of the received RF level. It also shows the expected difference between laboratory-generated signals and real off-air reception.
+The comparison illustrates that the CPS **Signal** value is not a direct linear representation of the received RF level. It also shows the expected difference between laboratory-generated signals and real off-air reception.  
 
-![CPS Signal vs RF Level](images/CPSSignal_vs_RFLevel.png)
+![CPS Signal vs RF Level](images/CPSSignal_vs_RFLevel.png)  
 
---
+---
 
 ## Comparison with Other Receivers
 
@@ -366,11 +367,9 @@ Some RF ranges produce large changes in the Signal value, while others show obvi
 
 ### Generator vs Off-Air
 
-Generator measurements should therefore be considered the controlled laboratory reference, while off-air measurements better represent real operating conditions.  
+Generator measurements provide a controlled reference, while off-air measurements represent actual operating conditions. Both are useful, but they should not be directly compared.
 
 This is expected, since real FM signals include modulation, fading, receiver AGC and varying signal-to-noise ratios.
-
-Generator measurements provide a controlled reference, while off-air measurements represent actual operating conditions. Both are useful, but they should not be directly compared.
 
 ---
 
